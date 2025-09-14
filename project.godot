@@ -11,9 +11,6 @@ config_version=5
 [application]
 
 config/name="AdventureGame"
+run/main_scene="uid://nt7w8lg66p6a"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
-
-[rendering]
-
-renderer/rendering_method="forward_plus"
