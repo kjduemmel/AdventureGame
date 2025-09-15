@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dxomkv0bjvwkt"
-path="res://.godot/imported/NewLand-Intro.wav-abf2aa6faed422031c15ceed1e999820.sample"
+path="res://.godot/imported/NewLand-Intro.wav-cf29875ff28219546fa825c3c5f3e952.sample"
 
 [deps]
 
-source_file="res://Assets/Music/Overworld/NewLand-Intro.wav"
-dest_files=["res://.godot/imported/NewLand-Intro.wav-abf2aa6faed422031c15ceed1e999820.sample"]
+source_file="res://Assets/Audio/Music/Overworld/NewLand-Intro.wav"
+dest_files=["res://.godot/imported/NewLand-Intro.wav-cf29875ff28219546fa825c3c5f3e952.sample"]
 
 [params]
 
