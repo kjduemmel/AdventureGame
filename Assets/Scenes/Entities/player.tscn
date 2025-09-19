@@ -1,25 +1,40 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0pr6qbh1w4gy"]
+[gd_scene load_steps=12 format=3 uid="uid://b0pr6qbh1w4gy"]
 
 [ext_resource type="Script" uid="uid://dfl7g04oatc6o" path="res://Assets/Scripts/player.gd" id="1_o8828"]
 [ext_resource type="Script" uid="uid://c5uwebebwj8br" path="res://Assets/Scripts/StateMachine/state_machine.gd" id="2_wybs3"]
 [ext_resource type="Script" uid="uid://b3ldcqblyiwso" path="res://Assets/Scripts/StateMachine/idle.gd" id="3_8ho57"]
 [ext_resource type="Script" uid="uid://fsa5nje5w2y3" path="res://Assets/Scripts/player_input.gd" id="4_8ho57"]
 [ext_resource type="Script" uid="uid://c6mcvafy70rhm" path="res://Assets/Scripts/StateMachine/move.gd" id="4_uvq5q"]
-[ext_resource type="Texture2D" uid="uid://cyd56kphdwrgl" path="res://icon.svg" id="6_v1l0r"]
+[ext_resource type="Texture2D" uid="uid://1810xfeb0ju6" path="res://Assets/Sprites/human_idle.png" id="6_q0lhw"]
+[ext_resource type="Texture2D" uid="uid://cw183o727xre2" path="res://Assets/Sprites/human_move_right.png" id="7_2sfyc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uvq5q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6dhp"]
+atlas = ExtResource("7_2sfyc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wo1vt"]
+atlas = ExtResource("7_2sfyc")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_v1l0r"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_v1l0r")
+"texture": ExtResource("6_q0lhw")
 }],
 "loop": true,
 "name": &"Idle",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6dhp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wo1vt")
+}],
 "loop": true,
 "name": &"Move",
 "speed": 5.0
@@ -35,18 +50,21 @@ shape = SubResource("CapsuleShape2D_uvq5q")
 script = ExtResource("2_wybs3")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node2D" parent="MovementSM" node_paths=PackedStringArray("move_state")]
+[node name="Idle" type="Node2D" parent="MovementSM" node_paths=PackedStringArray("move_state", "animations")]
 script = ExtResource("3_8ho57")
 move_state = NodePath("../Move")
+animations = NodePath("../../Body")
+animation_name = &"Idle"
 
 [node name="Move" type="Node2D" parent="MovementSM" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("4_uvq5q")
 idle_state = NodePath("../Idle")
+animation_name = &"Move"
 
 [node name="PlayerInput" type="Node2D" parent="."]
 script = ExtResource("4_8ho57")
 
 [node name="Body" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.15625, 0.234375)
+scale = Vector2(1.0625, 1.0625)
 sprite_frames = SubResource("SpriteFrames_v1l0r")
-animation = &"Move"
+animation = &"Idle"
