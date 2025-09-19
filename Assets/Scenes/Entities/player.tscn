@@ -16,7 +16,12 @@ animations = [{
 "texture": ExtResource("6_v1l0r")
 }],
 "loop": true,
-"name": &"default",
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Move",
 "speed": 5.0
 }]
 
@@ -44,3 +49,4 @@ script = ExtResource("4_8ho57")
 [node name="Body" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.15625, 0.234375)
 sprite_frames = SubResource("SpriteFrames_v1l0r")
+animation = &"Move"
