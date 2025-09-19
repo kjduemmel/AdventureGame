@@ -1,3 +1,46 @@
-[gd_scene format=3 uid="uid://b0pr6qbh1w4gy"]
+[gd_scene load_steps=9 format=3 uid="uid://b0pr6qbh1w4gy"]
 
-[node name="Player" type="Node2D"]
+[ext_resource type="Script" uid="uid://dfl7g04oatc6o" path="res://Assets/Scripts/player.gd" id="1_o8828"]
+[ext_resource type="Script" uid="uid://c5uwebebwj8br" path="res://Assets/Scripts/StateMachine/state_machine.gd" id="2_wybs3"]
+[ext_resource type="Script" uid="uid://b3ldcqblyiwso" path="res://Assets/Scripts/StateMachine/idle.gd" id="3_8ho57"]
+[ext_resource type="Script" uid="uid://fsa5nje5w2y3" path="res://Assets/Scripts/player_input.gd" id="4_8ho57"]
+[ext_resource type="Script" uid="uid://c6mcvafy70rhm" path="res://Assets/Scripts/StateMachine/move.gd" id="4_uvq5q"]
+[ext_resource type="Texture2D" uid="uid://cyd56kphdwrgl" path="res://icon.svg" id="6_v1l0r"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uvq5q"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v1l0r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_v1l0r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_o8828")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_uvq5q")
+
+[node name="MovementSM" type="Node2D" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("2_wybs3")
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node2D" parent="MovementSM" node_paths=PackedStringArray("move_state")]
+script = ExtResource("3_8ho57")
+move_state = NodePath("../Move")
+
+[node name="Move" type="Node2D" parent="MovementSM" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("4_uvq5q")
+idle_state = NodePath("../Idle")
+
+[node name="PlayerInput" type="Node2D" parent="."]
+script = ExtResource("4_8ho57")
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.15625, 0.234375)
+sprite_frames = SubResource("SpriteFrames_v1l0r")
