@@ -4,15 +4,18 @@ extends Node
 @export
 var parent: CharacterBody2D
 @export
-var animations: AnimatedSprite2D
+var anim_tree: AnimationTree
 @export
 var input: Node
 @export
 var animation_name: StringName
 
+var _playback: AnimationNodeStateMachinePlayback
+
 func enter() -> void:
-	if animations and animation_name != StringName() and "play" in animations:
-		animations.play(animation_name)
+	if anim_tree and _playback and animation_name != StringName():
+		anim_tree.active = true
+		_playback.travel(animation_name)
 
 func exit() -> void: pass
 func process_input(_event: InputEvent) -> State: return null

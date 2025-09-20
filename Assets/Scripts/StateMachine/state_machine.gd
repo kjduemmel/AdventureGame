@@ -6,11 +6,11 @@ var starting_state: State
 
 var current_state: State
 
-func init(parent: CharacterBody2D, animations: AnimatedSprite2D, input: Node) -> void:
+func init(parent: CharacterBody2D, anim_tree: AnimationTree, input: Node) -> void:
 	for c in get_children():
 		if c is State:
 			c.parent = parent
-			c.animations = animations
+			c.anim_tree = anim_tree
 			c.input = input
 	current_state = starting_state
 	current_state.enter()
